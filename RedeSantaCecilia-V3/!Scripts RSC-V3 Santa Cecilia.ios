@@ -1,0 +1,319 @@
+!Scripts RSC-V3 
+! VLAN 10 - ALUNOS = /23
+! VLAN 20 - PROFESSORES = /27
+! VLAN 30 - ADMINISTRAÇÃO = /28
+! VLAN 40 - SEGURANÇA = /28
+! VLAN 50 - GERENCIAMENTO/SUPORTE = /28
+
+! Rede ID: 172.16.0.0/16
+
+!SCRIPT SW-RECEPÇÃO
+enable
+    configure terminal
+        hostname SW-RECEPCAO
+        banner motd "ACESSO SOMENTE AO DEPARTAMENTO DE GERENCIAMENTO E SUPORTE!"
+        enable secret Senha*Enable*00
+        vlan 10
+            name ALUNOS
+        vlan 20
+            name PROFESSORES
+        vlan 30
+            name ADMINISTRACAO
+        vlan 40
+            name SEGURANÇA
+        vlan 50
+            name GERENCIAMENTO
+        interface g0/1
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,40,50,99
+            exit
+        interface range f0/8 - 11
+            switchport mode access
+            switchport acces vlan 30
+            exit
+        interface f0/1
+            switchport mode access
+            switchport acces vlan 40
+            exit
+        interface vlan 50
+            ip address 172.16.2.61 255.255.255.240
+            exit
+        !Configurar Acesso SSH (Remoto/Remotamente)
+        ip domain-name local.info
+        crypto key generate rsa general-keys modulus 1024
+        username suporte-local@1 privilege 15 secret suporte@local123
+        line vty 0 15
+            login local
+            transport input ssh
+            exit
+        line console 0
+            login local
+            exit
+    exit
+write memory
+
+!SCRIPT SW-SALA 02
+enable
+    configure terminal
+        hostname SW-SALA02
+        banner motd "ACESSO SOMENTE AO DEPARTAMENTO DE GERENCIAMENTO E SUPORTE!"
+        enable secret Senha*Enable*00
+        vlan 10
+            name ALUNOS
+        vlan 20
+            name PROFESSORES
+        vlan 30
+            name ADMINISTRAÇÃO
+        vlan 40 
+            name SEGURANÇA
+        vlan 50 
+            name GERENCIAMENTO
+        interface g0/1
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,40,50,99
+            exit
+        interface vlan 50
+            ip address 172.16.2.60 255.255.255.240
+            exit
+        interface range f0/1 - 4
+            switchport mode access
+            switchport access vlan 10
+            exit
+        interface f0/5
+            switchport mode access
+            switchport access vlan 20
+            exit
+        !Configurar Acesso SSH (Remoto/Remotamente)
+        ip domain-name info.local
+        crypto key generate rsa general-keys modulus 1024
+        username suporte-local@1 privilege 15 secret suporte@local123
+        line vty 0 15
+            login local
+            transport input ssh
+            exit
+        line console 0
+            login local
+            exit
+        exit
+write memory
+
+!SCRIPT SW-SALA 01
+enable
+    configure Terminal
+    hostname SW-SALA01
+    banner motd "ACESSO SOMENTE AO DEPARTAMENTO DE GERENCIAMENTO E SUPORTE!"
+    enable secret Senha*Enable*00
+    vlan 10
+        name ALUNOS
+    vlan 20
+        name PROFESSORES
+    vlan 30
+        name ADMINISTRACAO
+    vlan 40
+        name SEGURANÇA
+    vlan 50
+        name GERENCIAMENTO
+    interface g0/1
+        switchport mode trunk
+        switchport trunk native vlan 99
+        switchport trunk allowed vlan 10,20,30,40,50,99
+        exit
+    interface range f0/1 - 4
+        switchport mode access
+        switchport access vlan 10
+        exit
+    interface f0/5
+        switchport mode access
+        switchport access vlan 20
+        exit
+    interface vlan 50
+        ip address 172.16.2.59 255.255.255.240
+        exit
+    !Configurar Acesso SSH (Remoto/Remotamente)
+    ip domain-name info.local
+    crypto key generate rsa general-keys modulus 1024
+    username suporte-local@1 privilege 15 secret suporte@local123
+    line vty 0 15
+        login local
+        transport input ssh
+        exit
+    line console 0
+        login local
+        exit
+    exit
+write memory 
+
+!SCRIPT SW-DATA
+enable
+    configure terminal
+        hostname SW-DATA
+        banner motd "ACESSO SOMENTE AO DEPARTAMENTO DE GERENCIAMENTO E SUPORTE!"
+        enable secret Senha*Enable*00
+    vlan 10
+        name ALUNOS
+    vlan 20
+        name PROFESSORES
+    vlan 30
+        name ADMINISTRACAO
+    vlan 40
+        name SEGURANÇA
+    vlan 50
+        name GERENCIAMENTO
+    interface g0/1 
+        switchport mode trunk
+        switchport trunk native vlan 99
+        switchport trunk allowed vlan 10,20,30,40,50,99
+        exit
+    interface range f0/1 - 4
+        switchport mode access
+        switchport access vlan 50
+        exit
+    interface vlan 50
+        ip address 172.16.2.58 255.255.255.240
+        exit
+    !Configurar Acesso SSH (Remoto/Remotamente)
+    ip domain-name info.local
+    crypto key generate rsa general-keys modulus 1024
+    username suporte-local@01 privilege 15 secret suporte123
+    line vty 0 15
+        login local
+        transport input ssh
+        exit
+    line console 0
+        login local
+        exit
+    exit
+write memory
+
+!SCRIPT SW - CORE
+enable
+    configure terminal
+        hostname SW-CORE
+        banner motd "ACESSO SOMENTE AO DEPARTAMENTO DE GERENCIAMENTO E SUPORTE!"
+        enable secret Senha*Enable*00
+        vlan 10
+            name ALUNOS
+        vlan 20
+            name PROFESSORES
+        vlan 30
+            name ADMINISTRACAO
+        vlan 40
+            name SEGURANCA
+        vlan 50
+            name GERENCIAMENTO
+        interface g6/1
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,40,50,99
+            exit
+        interface g7/1 
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,40,50,99
+            exit
+        interface g8/1
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,40,50,99
+            exit
+        interface g9/1
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,40,50,99
+            exit
+        interface g0/1
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,40,50,99
+            exit
+        interface vlan 50
+            ip address 172.16.2.57 255.255.255.240
+            exit
+        !Configurar Acesso SSH (Remoto/Remotamente)
+        ip domain-name info.local
+        crypto key generate rsa general-keys modulus 1024
+        username suporte-local@1 privilege 15 secret suporte@123
+        line vty 0 15
+            login local
+            transport input ssh
+            exit
+        line console 0
+            login local
+            exit
+        exit
+wrime memory
+!SCRIPT RT-CORE
+enable
+    configure Terminal
+        hostname RT-CORE
+        banner motd "ACESSO SOMENTE AO DEPARTAMENTO DE GERENCIAMENTO E SUPORTE!"
+        enable secret Senha*Enable*00
+        !Configurar GATEWAY da VLAN 10
+        interface g0/0.10
+            encapsulation dot1Q 10
+            ip helper-address 172.16.2.50
+            ip address 172.16.0.1
+            exit
+        !Configurar GATEWAY da VLAN 20
+        interface g0/0.20
+            encapsulation dot1Q 20
+            ip helper-address 172.16.2.50
+            ip address 172.16.2.1 255.255.255.224
+            exit
+        !Configurar GATEWAY da VLAN 30
+        interface g0/0.30
+            encapsulation dot1Q 30
+            ip helper-address 172.16.2.50
+            ip address 172.16.2.33 255.255.255.240
+            exit
+        !Configurar GATEWAY da VLAN 40
+        interface g0/0.40
+            encapsulation dot1Q 40
+            ip helper-address 172.16.2.50
+            ip address 172.16.2.65 255.255.255.240
+            exit
+        !Configurar GATEWAY da VLAN 50
+        interface g0/0.50
+            encapsulation dot1Q 50
+            ip helper-address 172.16.2.50
+            ip address 172.16.2.49 255.255.255.240
+            exit
+        !Configurar IP para Rota Padrão para Internet
+        interface serial0/0/0
+            ip address 200.100.0.1 255.255.255.252
+            exit
+        !Configurar Roteamento Padrão
+        ip route 0.0.0.0 0.0.0.0 200.100.0.2
+        !Configurar Rota padrão para rede de Barueri:
+        interface serial0/0/1
+            ip address 200.200.100.2 255.255.255.252
+            no shutdown
+            exit
+        !Configurar Acesso SSH (Remoto/Remotamente)
+        ip domain-name info.local
+        crypto key generate rsa general-keys modulus 1024
+        username suporte-local@1 privilege 15 secret suporte@123
+        line vty 0 15
+            transport input ssh
+            login local
+            exit
+        line console 0
+            login local
+            exit
+        !Configurar Rotas para cada VLAN da rede de Barueri:
+        !Rota VLAN 10 - Alunos Barueri
+        ip route 192.168.0.0 255.255.254.0 200.200.100.1
+        !Rota VLAN 20 - Professores Barueri
+        ip route 192.168.2.0 255.255.255.224 200.200.100.1
+        !Rota VLAN 30 - Coordenação Barueri
+        ip route 192.168.2.32 255.255.255.224 200.200.100.1
+        !Rota VLAN 40 - Suporte Barueri
+        ip route 192.168.2.64 255.255.255.224 200.200.100.1
+        !Rota VLAN 20 - Professores Barueri
+        exit
+wr
+
+
+
