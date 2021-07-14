@@ -1,0 +1,68 @@
+powerff
+
+CRTL + L
+
+
+
+172.16.0.0
+
+	vlan 10 ALUNOS 510 hosts:
+		Rede: 172.16.0.0/23 - 255.255.254.0
+		Primeiro IP: 
+		Ultimo IP: 172.16.1.254
+		Broadcast: 172.16.1.255
+		NM: 2
+
+	vlan 20 PROFESSORES 30 hosts:
+		Rede: 172.16.2.0/27 - 255.255.255.224
+		Primeiro IP: 
+		Ultimo IP: 172.16.2.30
+		Broadcast: 172.16.2.31
+		NM: 32
+
+	vlan 30 ADMINISTRAÇÃO 14 hosts:
+		Rede: 172.16.2.32/28 - 255.255.255.240
+		Primeiro IP:
+		Ultimo IP: 172.16.2.46
+		Broadcast: 172.16.2.47
+		NM: 16
+
+	 vlan 50 GERENCIAMENTO/SUPORTE 14 hosts:
+		Rede: 172.16.2.48/28 - 255.255.255.240
+		Primeiro IP: 172.16.2.49
+		Ultimo IP: 172.16.2.62
+		Broadcast: 172.16.2.63
+		NM: 16
+
+	vlan 40 SEGURANÇA 10 hosts:
+		Rede: 172.16.2.64/28 - 255.255.255.240
+		Primeiro IP: 172.16.2.65
+		Ultimo IP: 172.16.2.78
+		Broadcast: 172.16.2.79
+		NM: 8
+
+	Reserva ?? hosts
+		Rede: 172.16.2.80/?? - ??
+
+
+
+
+
+
+
+
+
+	SW-RECEPÇÃO: 172.16.2.61 255.255.255.240
+	SW-SALA 02:  172.16.2.60 255.255.255.240
+	SW-SALA 01:  172.16.2.59 255.255.255.240
+	SW-DATA:     172.16.2.58 255.255.255.240
+	SW-CORE:     172.16.2.57 255.255.255.240
+	RT-DHCP:     172.16.2.50 255.255.255.240
+	RT-CORE:     172.16.2.51 255.255.255.240
+
+	6/1
+	7/1
+	8/1
+	9/1
+	0/1
+           

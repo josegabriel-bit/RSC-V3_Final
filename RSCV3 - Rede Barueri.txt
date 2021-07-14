@@ -1,0 +1,56 @@
+Rede - Barueri: 
+
+	VLAN 10 - Alunos 500 
+	VLAN 20 - Professores 20
+	VLAN 30 - Coordenação 15
+	VLAN 40 - SUPORTE 15
+
+	Rede: 192.168.0.0/24
+
+	Alunos - 500 Hosts
+	
+	Vlsm
+
+	Alunos: 500
+		ID: 192.168.0.0/23 - 255.255.254.0
+		Primeiro IP Válido 192.168.0.1
+		Ultimo IP Válido: 192.168.1.254
+		Broadcast: 192.168.1.255
+
+	Professores: 20
+		ID: 192.168.2.0/27 - 255.255.255.224
+		Primeiro IP Válido: 192.168.2.1
+		Ultimo IP Válido: 192.168.2.30
+		Broadcast: 192.168.2.31
+
+	Coordenação: 15
+		ID: 192.168.2.32/27 - 255.255.255.224
+		Primeiro IP Válido: 192.168.2.33
+		Ultimo IP Válido: 192.168.2.62
+		Broadcast: 192.168.2.63
+
+	Suporte: 15
+		ID: 192.168.2.64/27 - 255.255.255.224
+		Primeiro IP Válido: 192.168.2.65
+		Ultimo IP Válido: 192.168.94
+		Broadcast: 192.168.2.95
+	
+	Disponível:
+		ID: 192.168.2.96/??
+
+
+	Suporte IPS:
+	
+	Mask all: 255.255.255.224
+	RT-Core vlan 50: 192.168.2.65
+	SW - Sala 01 Redes Barueri: 192.168.2.66 
+	SW - Sala 02 Dev Barueri: 192.168.2.67 
+	SW - Sala 03 - Coordenação Barueri: 192.168.2.68 
+	SW - Core Barueri: 192.168.2.69 
+	SW - Suporte Barueri: 192.168.2.70 
+	SVR-DHCP Barueri: 192.168.2.71
+	SVR-HTTP Barueri: 192.168.2.72
+	SVR-DNS Barueri: 192.168.2.73
+	LT-Suporte Barueri: 192.168.2.74
+	
+	
